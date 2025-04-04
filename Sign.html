@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <style>body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #1e3a8a, #1565c0);
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: rgba(21, 101, 192, 0.8);
+        width: 100%;
+        position: absolute;
+        top: 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .logo {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #ffeb3b;
+    }
+    
+    nav ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+    
+    nav ul li {
+        margin: 0 10px;
+    }
+    
+    nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+    
+    nav ul li a:hover {
+        color: #ffeb3b;
+    }
+    
+    .user-actions {
+        display: flex;
+        align-items: center;
+    }
+    
+    .user-actions button {
+        background-color: #ffeb3b;
+        border: none;
+        padding: 5px 10px;
+        margin-right: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    
+    .user-actions button:hover {
+        background-color: #e0d83b;
+    }
+    
+    .profile {
+        font-weight: bold;
+        color: #ffeb3b;
+    }
+    
+    main {
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .faq {
+        background-color: rgba(21, 101, 192, 0.9);
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        width: 100%;
+    }
+    
+    .faq h1 {
+        margin-bottom: 30px;
+        font-size: 2em;
+        color: #ffeb3b;
+    }
+    
+    .signup-form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .signup-form input {
+        padding: 15px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1em;
+        transition: border-color 0.3s;
+    }
+    
+    .signup-form input:focus {
+        border-color: #ffeb3b;
+        outline: none;
+    }
+    
+    .signup-form button {
+        background-color: #ffeb3b;
+        border: none;
+        padding: 15px;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 5px;
+        font-size: 1em;
+        transition: background-color 0.3s;
+    }
+    
+    .signup-form button:hover {
+        background-color: #e0d83b;
+    }
+    
+    .additional-links {
+        margin-top: 20px;
+    }
+    
+    .additional-links a {
+        color: #ffeb3b;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+    
+    .additional-links a:hover {
+        color: #e0d83b;
+    }
+    
+    .error-message {
+        color: #ff6347;
+        margin-top: 10px;
+        font-size: 0.9em;
+    }
+    </style>
+    <header>
+        <div class="logo">Logo</div>
+        <nav>
+            <ul>
+                <li><a href="#">News</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <button>+ Create</button>
+            <div class="profile">FP Freaky-Faidi</div>
+        </div>
+    </header>
+    <main>
+        <section class="faq">
+            <h1>Sign Up for EventHub</h1>
+            <form class="signup-form" id="signupForm">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <button type="submit">Sign Up</button>
+                <div id="error-message" class="error-message"></div>
+            </form>
+            <div class="additional-links">
+                <a href="login.html">Login</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const confirmPassword = document.getElementById('confirmPassword').value.trim();
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = '';
+
+            if (password !== confirmPassword) {
+                errorMessage.textContent = 'Passwords do not match.';
+                return;
+            }
+            alert('Sign up successful!');
+        });
+    </script>
+</body>
+</html>
