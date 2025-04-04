@@ -3,181 +3,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Sign Up | EventHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-dark: #1e3a8a;
+            --primary: #3b82f6;
+            --primary-light: #93c5fd;
+            --accent: #facc15;
+            --accent-dark: #eab308;
+            --white: #ffffff;
+            --gray-light: #f3f4f6;
+            --gray: #9ca3af;
+            --dark: #1f2937;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(30, 64, 175, 0.9);
+            padding: 15px 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-left img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-left .brand-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+
+        .navbar-center {
+            display: flex;
+            gap: 5px;
+        }
+
+        .navbar-center a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-center a:hover {
+            color: var(--accent);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-center a.active {
+            color: var(--dark);
+            background-color: var(--accent);
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .create-btn {
+            background-color: var(--accent);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .create-btn:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .user-profile:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .user-name {
+            font-weight: 500;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Sign Up Container */
+        .signup-container {
+            background-color: rgba(15, 89, 185, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            margin-top: 100px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .signup-container h1 {
+            margin-bottom: 30px;
+            font-size: 2em;
+            color: var(--accent);
+        }
+
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .signup-form input {
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .signup-form input:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        .signup-form button {
+            background-color: var(--accent);
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: all 0.3s;
+            color: var(--dark);
+            margin-top: 10px;
+        }
+
+        .signup-form button:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .additional-links {
+            margin-top: 20px;
+        }
+
+        .additional-links a {
+            color: var(--accent);
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .additional-links a:hover {
+            color: var(--accent-dark);
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #ff6347;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-center {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(30, 64, 175, 0.95);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(5px);
+            }
+
+            .navbar-center.show {
+                display: flex;
+            }
+
+            .navbar-center a {
+                margin: 10px 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .navbar-right .user-name {
+                display: none;
+            }
+
+            .signup-container {
+                margin-top: 120px;
+                padding: 30px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <style>body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #1e3a8a, #1565c0);
-        color: #fff;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-        background-color: rgba(21, 101, 192, 0.8);
-        width: 100%;
-        position: absolute;
-        top: 0;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    
-    .logo {
-        font-size: 1.5em;
-        font-weight: bold;
-        color: #ffeb3b;
-    }
-    
-    nav ul {
-        list-style: none;
-        display: flex;
-        margin: 0;
-        padding: 0;
-    }
-    
-    nav ul li {
-        margin: 0 10px;
-    }
-    
-    nav ul li a {
-        color: #fff;
-        text-decoration: none;
-        font-weight: bold;
-        transition: color 0.3s;
-    }
-    
-    nav ul li a:hover {
-        color: #ffeb3b;
-    }
-    
-    .user-actions {
-        display: flex;
-        align-items: center;
-    }
-    
-    .user-actions button {
-        background-color: #ffeb3b;
-        border: none;
-        padding: 5px 10px;
-        margin-right: 10px;
-        cursor: pointer;
-        font-weight: bold;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
-    
-    .user-actions button:hover {
-        background-color: #e0d83b;
-    }
-    
-    .profile {
-        font-weight: bold;
-        color: #ffeb3b;
-    }
-    
-    main {
-        padding: 20px;
-        text-align: center;
-    }
-    
-    .faq {
-        background-color: rgba(21, 101, 192, 0.9);
-        padding: 40px;
-        border-radius: 10px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        max-width: 400px;
-        width: 100%;
-    }
-    
-    .faq h1 {
-        margin-bottom: 30px;
-        font-size: 2em;
-        color: #ffeb3b;
-    }
-    
-    .signup-form {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .signup-form input {
-        padding: 15px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 1em;
-        transition: border-color 0.3s;
-    }
-    
-    .signup-form input:focus {
-        border-color: #ffeb3b;
-        outline: none;
-    }
-    
-    .signup-form button {
-        background-color: #ffeb3b;
-        border: none;
-        padding: 15px;
-        cursor: pointer;
-        font-weight: bold;
-        border-radius: 5px;
-        font-size: 1em;
-        transition: background-color 0.3s;
-    }
-    
-    .signup-form button:hover {
-        background-color: #e0d83b;
-    }
-    
-    .additional-links {
-        margin-top: 20px;
-    }
-    
-    .additional-links a {
-        color: #ffeb3b;
-        text-decoration: none;
-        font-weight: bold;
-        transition: color 0.3s;
-    }
-    
-    .additional-links a:hover {
-        color: #e0d83b;
-    }
-    
-    .error-message {
-        color: #ff6347;
-        margin-top: 10px;
-        font-size: 0.9em;
-    }
-    </style>
-    <header>
-        <div class="logo">Logo</div>
-        <nav>
-            <ul>
-                <li><a href="#">News</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Help</a></li>
-                <li><a href="#">About Us</a></li>
-            </ul>
-        </nav>
-        <div class="user-actions">
-            <button>+ Create</button>
-            <div class="profile">FP Freaky-Faidi</div>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <img src="/api/placeholder/40/40" alt="Logo">
+            <span class="brand-name">EventHub</span>
         </div>
-    </header>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="navbar-center" id="navMenu">
+            <a href="message.html">News</a>
+            <a href="faq.html">FAQ</a>
+            <a href="aide.html">Help</a>
+            <a href="apropos.html">About Us</a>
+        </div>
+        <div class="navbar-right">
+            <button class="create-btn">
+                <i class="fas fa-plus"></i>
+                Create
+            </button>
+            <div class="user-profile">
+                <div class="user-avatar">FF</div>
+                <span class="user-name">Freaky-Faidi</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </nav>
+
     <main>
-        <section class="faq">
+        <section class="signup-container">
             <h1>Sign Up for EventHub</h1>
-            <form class="signup-form" id="signupForm" action="signup.php" method="post">
+            <form class="signup-form" id="signupForm">
                 <input type="text" id="username" placeholder="Username" required>
                 <input type="email" id="email" placeholder="Email" required>
                 <input type="password" id="password" placeholder="Password" required>
@@ -186,12 +322,21 @@
                 <div id="error-message" class="error-message"></div>
             </form>
             <div class="additional-links">
-                <a href="login.html">Login</a>
+                <a href="login.html">Already have an account? Login</a>
             </div>
         </section>
     </main>
 
     <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('show');
+        });
+
+        // Form validation
         document.getElementById('signupForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const username = document.getElementById('username').value.trim();
